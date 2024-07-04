@@ -12,21 +12,7 @@ const Linguagens = ref('')
 const Biografia = ref('')
 const senha = ref('')
 const confirmaçao = ref('')
-const botaoDados = ref('')
-function limpardados (){
-  email.value = ""
-  nome.value = ""
-  dataN.value = ""
-  endereço.value = ""
-  cidade.value = ""
-  estado.value = ""
-  Hobbies.value = ""
-  Linguagens.value = ""
-  Biografia.value = ""
-  senha.value = ""
-  confirmaçao.value = ""
-  botaoDados.value = false
-}
+const botaoDados = ref(false)
 
 
 
@@ -35,8 +21,10 @@ function limpardados (){
 
 <template>
   <form>
+
   <div class="row">
-    <div class="col">
+    <h1 class="titulo">Formulário para cadastro do usuario</h1>
+    <div class="formulario">
       <input type="text" v-bind:value="email" v-on:input="event => email = event.target.value" class="form-control"
           placeholder="Enter email" name="email ">
         <input type="text" v-bind:value="nome" v-on:input="event => nome = event.target.value" class="form-control"
@@ -49,7 +37,8 @@ function limpardados (){
           placeholder="insira sua cidade">
      
 
-      <p><h6>insira seu Estado</h6>  </p>
+       <h4>selecione seu estado:</h4>
+      
 
      <select v-bind:value="estado" v-on:input="event => estado = event.target.value" class="form-select mt-3">
      <option>AC</option>
@@ -85,12 +74,11 @@ function limpardados (){
    <input type="text" v-bind:value="Linguagens" v-on:input="event => Linguagens = event.target.value" class="form-control" placeholder="insira suas Linguagens de programação
 ">
    <input type="text" v-bind:value="Biografia" v-on:input="event => Biografia = event.target.value" class="form-control" placeholder="insira sua Biografia">
-
-
+ <input type="password" v-bind:value="senha" v-on:input="event => senha = event.target.value" class="form-control" placeholder="insira sua senha" name="pswd">
+      <input type="password" v-bind:value="confirmaçao" v-on:input="event => confirmaçao = event.target.value" class="form-control" placeholder="confirmaçao de senha" name="pswd">
     </div>
     <div class="col">
-      <input type="password" v-bind:value="senha" v-on:input="event => senha = event.target.value" class="form-control" placeholder="insira sua senha" name="pswd">
-      <input type="password" v-bind:value="confirmaçao" v-on:input="event => confirmaçao = event.target.value" class="form-control" placeholder="confirmaçao de senha" name="pswd">
+     
 
       
     </div>
@@ -99,11 +87,11 @@ function limpardados (){
 </form>
 
 
-<button v-on:click="botaoDados = true ">mostrar dados do usuario</button>
-<button @click="limpardados"> limpar dados</button>
+<button @click="botaoDados = !botaoDados">Mostrar</button>
 
-<div v-if = "botaoDados" >
-<h4>dados usuario</h4>
+
+<div v-if = "botaoDados" class="resultado" >
+<h5>dados usuario</h5>
     <p>email digitado: {{ email }}</p>
 <p>nome digitado:{{ nome }}</p>
 <p>data de nascimento digitado:{{ dataN }}</p>
@@ -120,5 +108,42 @@ function limpardados (){
 </template>
 
 <style scoped>
+.titulo {
+  
+  margin: 1rem 2rem;
+  border-radius: 20px;
+  padding: .75rem;
+  display: flex;
+  gap: 1rem
+}
+.formulario,
+.resultado {
+  width: 45vw;
+  min-height: 70vh;
+  border-radius: 20px;
+  padding: 20px
+}
+.formulario {
+  background-color: #d29696
+}
+.formulario .row {
+  width: 80%;
+  margin: 1.3rem 0;
+  display: flex;
+  justify-content: space-between;
+}
+.resultado {
+  background-color: #98e0aa;
+}
 
+button {
+  padding: .5rem 1rem;
+  border: none;
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #e1e1e1;
+}
 </style>
